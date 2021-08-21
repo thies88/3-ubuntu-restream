@@ -1,0 +1,27 @@
+server {
+	listen 80 default_server;
+
+	listen 443 ssl;
+	
+	# location for hls stream files
+	location /hls {
+            root /tmp;
+        }
+
+	
+	#allowed types
+	types {
+	
+		text/html html;
+		
+        # for HLS
+        application/vnd.apple.mpegurl m3u8;
+        video/mp2t ts;
+		
+		# for DASH
+		application/dash+xml mpd;
+    } 
+
+	ssl_certificate /config/keys/cert.crt;
+	ssl_certificate_key /config/keys/cert.key;
+}
